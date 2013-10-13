@@ -166,19 +166,30 @@ class LocationsController < ApplicationController
       arreglo=JSON.parse(ruta)
       @locations.each{|loc|
         for i in 0..arreglo["route"].length-1
-          if((loc.latitude==arreglo["route"][i]["latitude"])&&(loc.longitude==arreglo["route"][i]["longitude"]))
+          d=distancia(loc.latitude,loc.longitude,arreglo["route"][i]["latitude"],arreglo["route"][i]["longitude"])
+          #if((loc.latitude==arreglo["route"][i]["latitude"])&&(loc.longitude==arreglo["route"][i]["longitude"]))
+          if(d<20)
             @visit<<loc
           end
         end
       }
       @visit.uniq!
-      if(@vist.eql?(nil))
-        @mensaje="No se encontraron puntos de interes en esa ruta"
-      end
+      #if(@vist.eql?(nil))
+        #@mensaje="No se encontraron puntos de interes en esa ruta"
+      #end
       @visit_json=@visit.to_json
     end
-
   end
+
+  def inside?(l1,l2,r)
+    dis=distance(l1,l2)
+    if(dis<=r)
+      puts true
+    else
+      puts false
+    end
+  end
+
 
   def destroy_all
     # delete all location objects and any child objects associated with them
