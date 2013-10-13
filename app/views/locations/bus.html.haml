@@ -1,0 +1,29 @@
+%h1.title Buscar puntos de interes en determinado radio
+= form_tag :action => 'bus'
+Latitud:
+= text_field "", :auxLat
+Longitud:
+= text_field "", :auxLon
+Radio:
+= text_field "", :auxRad
+= submit_tag 'Buscar POI'
+%h2=@mensaje
+%input#locations{:type => "hidden", :value => @locations_json}
+
+%table#table
+  %thead
+    %tr
+      %th Name
+      %th Latitude
+      %th Longitude
+      %th Description
+  %tbody
+    - @locations.each do |location|
+      %tr
+        %td= location.name
+        %td= location.latitude
+        %td= location.longitude
+        %td= location.description
+
+%p
+= link_to 'Back to location list', locations_path

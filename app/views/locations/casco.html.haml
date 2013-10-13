@@ -1,0 +1,34 @@
+%h1.title Realizar calculo del casco convexo
+/= @tam
+%h2=@mensaje
+%input#locations{:type => "hidden", :value => @locations_json}
+
+%table#table
+  %thead
+    %tr
+      %th Name
+      %th Latitude
+      %th Longitude
+      %th Description
+  %tbody
+    - @locations.each do |location|
+      %tr
+        %td= location.name
+        %td= location.latitude
+        %td= location.longitude
+        %td= location.description
+
+%p
+
+%h2=@peri
+Busqueda de la distancia mas larga entre una ubicacion ingresada y una ubicacion en el casco convexo:
+= form_tag :action => 'casco'
+Latitud:
+= text_field "", :auxLat
+Longitud:
+= text_field "", :auxLon
+= submit_tag 'Buscar POI'
+%h2=@lejano
+
+%p
+= link_to 'Back to location list', locations_path

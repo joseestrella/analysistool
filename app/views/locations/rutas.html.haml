@@ -1,0 +1,28 @@
+%h1.title Buscar POI's visitados en una ruta
+= form_tag :action => 'rutas'
+Ruta:
+%p
+= text_area "", :rutas
+%p
+= submit_tag 'Buscar POIs'
+
+%h2=@mensaje
+%input#locations{:type => "hidden", :value => @visit_json}
+
+%table#table
+  %thead
+    %tr
+      %th Name
+      %th Latitude
+      %th Longitude
+      %th Description
+  %tbody
+    - @visit.each do |visit|
+      %tr
+        %td= visit.name
+        %td= visit.latitude
+        %td= visit.longitude
+        %td= visit.description
+
+%p
+= link_to 'Back to location list', locations_path
