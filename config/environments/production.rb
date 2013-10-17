@@ -1,7 +1,7 @@
 Analysistool::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
   config.assets.enabled = true
-#le solicitamos una búsqueda todos los archivos js y css a ruby, y le pedimos que los precompile
+#le solicitamos una bï¿½squeda todos los archivos js y css a ruby, y le pedimos que los precompile
 config.assets.precompile << Proc.new { |path|
     if path =~ /\.(css|js)\z/
       full_path = Rails.application.assets.resolve(path).to_path
@@ -32,7 +32,7 @@ config.assets.precompile << Proc.new { |path|
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = true
+  config.assets.compile = false
 
   # Generate digests for assets URLs
   config.assets.digest = true
@@ -63,7 +63,7 @@ config.assets.precompile << Proc.new { |path|
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w['jquery-2.0.3.min.js']
+  #config.assets.precompile += %w['jquery-2.0.3.min.js']
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
