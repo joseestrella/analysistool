@@ -16,3 +16,4 @@
 //= require maps/OpenLayers
 //= require maps/jquery-2.0.3.min
 //removed //= require_tree .
+;
