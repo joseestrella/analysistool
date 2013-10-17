@@ -1,5 +1,7 @@
 Analysistool::Application.configure do
-  # Settings specified here will take precedence over those in config/application.rb
+
+
+  #Settings specified here will take precedence over those in config/application.rb
   config.assets.enabled = true
 #le solicitamos una b�squeda todos los archivos js y css a ruby, y le pedimos que los precompile
 config.assets.precompile << Proc.new { |path|

@@ -36,9 +36,9 @@
 
 %p=link_to "Delete all", destroy_all_locations_path, :method => :get, :confirm => 'Are you sure?'
 
-= javascript_include_tag '/assets/maps/OpenLayers'
-= javascript_include_tag '/assets/maps/locations'
-= javascript_include_tag '/maps/jquery-2.0.3.min'
+= javascript_include_tag '/assets/maps/OpenLayers.js'
+= javascript_include_tag '/assets/maps/locations.js'
+= javascript_include_tag '/maps/jquery-2.0.3.min.js'
 
 :javascript
   initMap($("#locations").val());
