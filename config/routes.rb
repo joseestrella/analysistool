@@ -1,4 +1,6 @@
 Analysistool::Application.routes.draw do
+  #resources :gpsejemplos
+
   #get "locations/index"
   #
   #get "locations/new"
@@ -11,7 +13,7 @@ Analysistool::Application.routes.draw do
   # first created -> highest priority.
 
   # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
+
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
@@ -20,6 +22,12 @@ Analysistool::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+  resources :gpsejemplos do
+    collection do
+
+    end
+  end
+
 
   resources :locations do
     collection do
