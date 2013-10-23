@@ -24,7 +24,7 @@ Analysistool::Application.routes.draw do
   #   resources :products
   resources :gpsejemplos do
     collection do
-
+      get :rutas
     end
   end
 

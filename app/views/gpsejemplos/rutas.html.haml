@@ -1,0 +1,35 @@
+%h1.title Rutas varios usuarios
+
+.map
+  %div#map
+
+%input#locations{:type => "hidden", :value => @pois_json}
+-@usuarios.each do |us|
+  %h2= "Nombre = "+us.nombre+", ID = "+us.id.to_s
+
+%table#table
+  %thead
+    %tr
+      %th ID usuario
+      %th Latitude
+      %th Longitude
+      %th Timestamp
+  %tbody
+    - @pois.each do |poi|
+      %tr
+        %td=poi.idUsuario
+        %td= poi.latitude
+        %td= poi.longitude
+        %td= poi.timestamp
+
+%p
+= link_to 'Back to user list', gpsejemplos_path
+
+
+
+= javascript_include_tag '/assets/maps/OpenLayers'
+= javascript_include_tag '/assets/maps/locations'
+= javascript_include_tag '/assets/maps/jquery-2.0.3.min'
+
+:javascript
+  initMap($("#locations").val());

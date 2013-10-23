@@ -45,6 +45,19 @@ class GpsejemplosController < ApplicationController
     end
  end
 
+  def rutas
+    ids=params[:usua]
+    @usuarios=[]
+    @pois=[]
+    @pois_json=[]
+    if(!ids.eql?(nil))
+      @usuarios=Usuario.find(ids)
+      @pois=Gpsejemplo.where(idUsuario: ids)
+      @pois_json=@pois.to_json
+    end
+end
+
+
   def update
     @usuario = Usuario.find(params[:id])
 
