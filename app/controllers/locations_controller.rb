@@ -141,7 +141,6 @@ class LocationsController < ApplicationController
           end
         end
         @lejano="La distancia entre la ubicacion ingresada y el punto de interes del casco convexo mas alejado es: "+d.to_s
-        #@lejano_json=@lejano.to_json
       end
     end
     @peri="El perimetro del casco convexo es: "+perimetro.to_s+" metros"
@@ -167,16 +166,12 @@ class LocationsController < ApplicationController
       @locations.each{|loc|
         for i in 0..arreglo["route"].length-1
           d=distancia(loc.latitude,loc.longitude,arreglo["route"][i]["latitude"],arreglo["route"][i]["longitude"])
-          #if((loc.latitude==arreglo["route"][i]["latitude"])&&(loc.longitude==arreglo["route"][i]["longitude"]))
           if(d<20)
             @visit<<loc
           end
         end
       }
       @visit.uniq!
-      #if(@vist.eql?(nil))
-        #@mensaje="No se encontraron puntos de interes en esa ruta"
-      #end
       @visit_json=@visit.to_json
     end
   end
