@@ -61,7 +61,6 @@ end
   def update
     @usuario = Usuario.find(params[:id])
 
-    # if the object saves correctly to the database
     if @usuario.update_attributes(params[:usuario])
       # redirect the user to index
       redirect_to gpsejemplos_path, notice: 'Location was successfully updated.'
