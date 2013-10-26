@@ -14,8 +14,14 @@
           %td= check_box_tag "usua[]",usuario.id
           %td= usuario.nombre
           %td= link_to "Eliminar", gpsejemplo_path(usuario), :method => :delete, :confirm => 'Are you sure?'
-  = submit_tag 'Enviar'
-%p
+  = label :"", :algo, 'Ventana de distancia (Metros):'
+  = text_field_tag :radio, :"50"
+  %p
+  = label :"", :algo2, 'Ventana de tiempo (Segundos):'
+  = text_field_tag :tiempo, :"10"
+  %p
+  = submit_tag 'Realizar animacion'
+  %p
 
 %p=link_to "Crear usuario con una ruta", new_gpsejemplo_path
 = link_to 'Back to location list', locations_path

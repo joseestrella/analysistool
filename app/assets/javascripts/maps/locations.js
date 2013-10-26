@@ -4,6 +4,7 @@ var selectControl;
 var SHADOW_Z_INDEX = 10;
 var MARKER_Z_INDEX = 11;
 
+
 function initMap(locations) {
     map = new OpenLayers.Map("map");
     var mapnik = new OpenLayers.Layer.OSM();
@@ -46,19 +47,23 @@ function initMap(locations) {
 
     var locationsLayer = new OpenLayers.Layer.Vector("Locations", {styleMap: styles});
     map.addLayer(locationsLayer);
+    loca=0;
+    casa=function(){
+        if(loca in locationsJSON){
+            var locationPosition = new OpenLayers.LonLat(locationsJSON[loca].longitude, locationsJSON[loca].latitude).transform(fromProjection, toProjection);
+            var locationMarker = new OpenLayers.Feature.Vector(
+                new OpenLayers.Geometry.Point(locationPosition.lon, locationPosition.lat), {
+                    title: locationsJSON[loca].name,
+                    description: locationsJSON[loca].description
+                }
+            );
+            locationsLayer.addFeatures(locationMarker);
+            loca+=1;
+        }
 
-    for (var location in locationsJSON) {
-        var locationPosition = new OpenLayers.LonLat(locationsJSON[location].longitude, locationsJSON[location].latitude).transform(fromProjection, toProjection);
-
-        var locationMarker = new OpenLayers.Feature.Vector(
-            new OpenLayers.Geometry.Point(locationPosition.lon, locationPosition.lat), {
-                title: locationsJSON[location].name,
-                description: locationsJSON[location].description
-            }
-        );
-
-        locationsLayer.addFeatures(locationMarker);
     }
+    window.setInterval('casa()',1000*1)
+    //}
 
     selectControl = new OpenLayers.Control.SelectFeature(
         locationsLayer,

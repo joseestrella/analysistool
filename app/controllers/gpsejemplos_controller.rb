@@ -50,13 +50,45 @@ class GpsejemplosController < ApplicationController
     @usuarios=[]
     @pois=[]
     @pois_json=[]
+    @coincidencia=[]
+    aux=[]
     if(!ids.eql?(nil))
       @usuarios=Usuario.find(ids)
       @pois=Gpsejemplo.where(idUsuario: ids)
+      radio=params[:radio]
+      tiempo=params[:tiempo]
+      for i in 0..@pois.length-1
+        for j in i..@pois.length-1
+          if(!(@pois[i].idUsuario.eql?(@pois[j].idUsuario)))
+            dist=distancia(@pois[i].latitude,@pois[i].longitude,@pois[j].latitude,@pois[j].longitude)
+            aux=[]
+            if(dist<=radio.to_f)
+              time=(@pois[i].timestamp.to_f-@pois[j].timestamp.to_f)/1000
+              if(time<0)
+                time=time*-1
+              end
+              if(time<=tiempo.to_f)
+                aux<<@pois[i]
+                aux<<@pois[j]
+                @coincidencia<<aux
+              end
+            end
+          end
+        end
+      end
+      #@coincidencia.uniq!
       @pois_json=@pois.to_json
     end
-end
-
+  end
+  def distancia(lat1,long1,lat2,long2)
+    r= 6378.137
+    dLat=(lat1-lat2)*Math::PI/180
+    dLong=(long1-long2)*Math::PI/180
+    a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos((lat2)*Math::PI/180) * Math.cos((lat1)*Math::PI/180) * Math.sin(dLong/2) * Math.sin(dLong/2)
+    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+    d = r * c * 1000
+    return d
+  end
 
   def update
     @usuario = Usuario.find(params[:id])

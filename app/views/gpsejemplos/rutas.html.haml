@@ -1,4 +1,4 @@
-%h1.title Rutas varios usuarios
+%h1.title Animacion Rutas Usuarios
 
 .map
   %div#map
@@ -6,7 +6,9 @@
 %input#locations{:type => "hidden", :value => @pois_json}
 -@usuarios.each do |us|
   %h2= "Nombre = "+us.nombre+", ID = "+us.id.to_s
-
+%p
+%h2= @mensaje
+%h2 Coincidencias de puntos de usuarios
 %table#table
   %thead
     %tr
@@ -14,22 +16,31 @@
       %th Latitude
       %th Longitude
       %th Timestamp
+      %th ID usuario
+      %th Latitude
+      %th Longitude
+      %th Timestamp
   %tbody
-    - @pois.each do |poi|
+    -for i in 0..@coincidencia.length-1
       %tr
-        %td=poi.idUsuario
-        %td= poi.latitude
-        %td= poi.longitude
-        %td= poi.timestamp
+        %td= @coincidencia[i][0]["idUsuario"].to_s
+        %td= @coincidencia[i][0]["latitude"].to_s
+        %td= @coincidencia[i][0]["longitude"].to_s
+        %td= @coincidencia[i][0]["timestamp"]
+        %td=@coincidencia[i][1]["idUsuario"].to_s
+        %td=@coincidencia[i][1]["latitude"].to_s
+        %td=@coincidencia[i][1]["longitude"].to_s
+        %td=@coincidencia[i][1]["timestamp"]
+        /-i=i+1
 
 %p
 = link_to 'Back to user list', gpsejemplos_path
 
 
 
+= javascript_include_tag '/assets/maps/jquery-2.0.3.min'
 = javascript_include_tag '/assets/maps/OpenLayers'
 = javascript_include_tag '/assets/maps/locations'
-= javascript_include_tag '/assets/maps/jquery-2.0.3.min'
 
 :javascript
   initMap($("#locations").val());
