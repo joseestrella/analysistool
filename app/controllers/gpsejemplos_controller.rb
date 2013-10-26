@@ -55,6 +55,7 @@ class GpsejemplosController < ApplicationController
     if(!ids.eql?(nil))
       @usuarios=Usuario.find(ids)
       @pois=Gpsejemplo.where(idUsuario: ids)
+      @pois=@pois.order("timestamp")
       radio=params[:radio]
       tiempo=params[:tiempo]
       for i in 0..@pois.length-1

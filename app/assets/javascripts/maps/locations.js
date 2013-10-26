@@ -53,7 +53,7 @@ function initMap(locations) {
             var locationPosition = new OpenLayers.LonLat(locationsJSON[loca].longitude, locationsJSON[loca].latitude).transform(fromProjection, toProjection);
             var locationMarker = new OpenLayers.Feature.Vector(
                 new OpenLayers.Geometry.Point(locationPosition.lon, locationPosition.lat), {
-                    title: locationsJSON[loca].name,
+                    title: locationsJSON[loca].idUsuario,
                     description: locationsJSON[loca].description
                 }
             );
